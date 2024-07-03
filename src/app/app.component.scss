@@ -1,0 +1,7 @@
+@use './../app/shared/styles/variables' as *;
+
+.page-container {
+  background: #e3dae8;
+  height: calc(100vh - $header-height - 2rem);
+  padding: 1rem;
+}

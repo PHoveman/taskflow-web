@@ -1,0 +1,17 @@
+@use './../../../shared/styles/variables' as *;
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  height: $header-height;
+
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+  }
+}
