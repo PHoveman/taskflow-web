@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskRowComponent } from './task-row.component';
+import { TaskTDProgressComponent } from './task-td-progress.component';
 
-describe('TaskRowComponent', () => {
-  let component: TaskRowComponent
-  let fixture: ComponentFixture<TaskRowComponent>
+describe('TaskTDProgressComponent', () => {
+  let component: TaskTDProgressComponent
+  let fixture: ComponentFixture<TaskTDProgressComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TaskRowComponent]
+      imports: [TaskTDProgressComponent]
     })
     .compileComponents()
     
-    fixture = TestBed.createComponent(TaskRowComponent)
+    fixture = TestBed.createComponent(TaskTDProgressComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

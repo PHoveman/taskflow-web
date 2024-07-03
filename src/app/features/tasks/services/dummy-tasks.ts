@@ -1,13 +1,13 @@
 import { WritableSignal, signal } from "@angular/core";
 import { TaskModel } from "../models/task.model";
-import { TaskStatusEnum } from "@features/enums/task-status.enum";
+import { TaskPriorityEnum } from "../enums/task-status.enum";
 
 export const DUMMY_TASKS: WritableSignal<TaskModel[]> = signal([
   { 
     id: 'dokdfok20kf02k0j9',
     title: 'Editing',
     notes: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nVeniam quibusdam animi atque eaque! Perspiciatis ducimus fugiat amet eos quae eum eligendi, tempora id incidunt earum perferendis dolor cum vero adipisci? Lorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nVeniam quibusdam animi atque eaque! Perspiciatis ducimus fugiat amet eos quae eum eligendi, tempora id incidunt earum perferendis dolor cum vero adipisci? Lorem ipsum dolor sit, amet consectetur adipisicing elit.\n\nVeniam quibusdam animi atque eaque! Perspiciatis ducimus fugiat amet eos quae eum eligendi, tempora id incidunt earum perferendis dolor cum vero adipisci?',
-    status: TaskStatusEnum.Pending,
+    priority: TaskPriorityEnum.Low,
     isOpen: true,
     subTasks: [
       { id: 'eojowkvowjiji', title: 'Make notes for shoot', isCompleted: true },
@@ -23,7 +23,7 @@ export const DUMMY_TASKS: WritableSignal<TaskModel[]> = signal([
     id: '20ri9ig39ug39ug',
     title: 'Sort out house',
     notes: 'Sale move in',
-    status: TaskStatusEnum.Pending,
+    priority: TaskPriorityEnum.Low,
     isOpen: false,
     subTasks: []
   },
@@ -31,7 +31,7 @@ export const DUMMY_TASKS: WritableSignal<TaskModel[]> = signal([
     id: '29if29u882yh87h',
     title: 'Bum',
     notes: 'Sale move in',
-    status: TaskStatusEnum.Completed,
+    priority: TaskPriorityEnum.Low,
     isOpen: false,
     subTasks: [
       { id: 'fo9j39fj3g8h8h8', title: 'Do this', isCompleted: true }

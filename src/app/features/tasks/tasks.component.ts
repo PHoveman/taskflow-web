@@ -1,25 +1,25 @@
-import { CommonModule, NgClass, NgStyle, TitleCasePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { MatIconModule } from '@angular/material/icon';
-import { TaskCompletionCalcPipe } from './pipes/task-completion-calc.pipe';
-import { TaskModel } from './models/task.model';
-import { TaskStatusEnum } from '@features/enums/task-status.enum';
-import { TasksService } from './services/tasks.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
-
+import { TaskRowComponent } from './components/task-row/task-row.component';
+import { TaskModel } from './models/task.model';
+import { TaskCompletionCalcPipe } from './pipes/task-completion-calc.pipe';
+import { TasksService } from './services/tasks.service';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [MatIconModule, CommonModule, FormsModule, TaskCompletionCalcPipe],
+  imports: [MatIconModule, CommonModule, FormsModule, TaskCompletionCalcPipe, TaskRowComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss'
 })
 export class TasksComponent implements OnInit {
   tasks: WritableSignal<TaskModel[]> = signal([])
+  openedTaskId: WritableSignal<string | undefined> = signal(undefined)
 
   constructor(private tasksService: TasksService, private dialog: MatDialog) {}
 
@@ -32,5 +32,9 @@ export class TasksComponent implements OnInit {
       width: '800px',
       data: data
     })
+  }
+
+  public openTaskHandler(id: string | undefined): void {
+    this.openedTaskId.update(val => val === id ? undefined : id)
   }
 }

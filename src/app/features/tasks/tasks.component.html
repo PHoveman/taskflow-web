@@ -5,6 +5,7 @@
   <table cellPadding="0" cellSpacing="0">
     <thead>
       <th>Title</th>
+      <th>Priority</th>
       <th>Owner</th>
       <th>Date</th>
       <th>Duration</th>
@@ -12,54 +13,7 @@
     </thead>
     <tbody>
       @for (task of tasks(); track task.id) {
-        <tr (click)="task.isOpen = !task.isOpen" [ngClass]="{ 'active': task.isOpen }">
-          <td>{{ task.title }} - {{ task.isOpen }}</td>
-          <td class="owner">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon>
-          </td>
-          <td>12th Jan 2024</td>
-          <td class="duration">
-            <div class="duration-bar">
-              <div class="progress-bar" [ngStyle]="{ width: (task.subTasks | taskCompletionCalc) + '%' }"></div>
-            </div>
-          </td>
-          <td class="status" [ngClass]="task.status">{{ task.status | titlecase }}</td>
-        </tr>
-        <div *ngIf="task.isOpen" class="task-details">
-          <div class="head">
-            <h4>Task details</h4>
-            <div class="actionables">
-              <mat-icon aria-hidden="false" aria-label="Delete task" fontIcon="delete"></mat-icon>
-              <mat-icon aria-hidden="false" aria-label="Edit task" fontIcon="edit"></mat-icon>
-              <mat-icon aria-hidden="false" aria-label="Close task details" fontIcon="close" (click)="task.isOpen = false"></mat-icon>
-            </div>
-          </div>
-
-          <div class="body">
-            <div class="child-tasks">
-              <h5>{{ task.subTasks.length }} Tasks</h5>
-              <ul>
-                @for (subTask of task.subTasks; track subTask.id) {
-                  <li [class.completed]="subTask.isCompleted">
-                    <span>{{ subTask.title }}</span>
-                    <mat-icon 
-                      aria-hidden="false"
-                      aria-label="Example home icon"
-                      [fontIcon]=" subTask.isCompleted ? 'task_alt' : 'radio_button_unchecked'"
-                      (click)="subTask.isCompleted = !subTask.isCompleted">
-                    </mat-icon>
-                  </li>
-                } @empty {
-                  <p>No sub tasks</p>
-                }
-              </ul>
-            </div>
-            <div class="notes">
-              <h5>Notes</h5>
-              <p>{{ task.notes }}</p>
-            </div>
-          </div>
-        </div>
+        <app-task-row [task]="task" (toggleOpenTask)="openTaskHandler($event)" [isOpen]="openedTaskId() === task.id"></app-task-row>
       }
     </tbody>
   </table>
