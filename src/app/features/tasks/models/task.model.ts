@@ -1,5 +1,4 @@
 import { BaseEntity } from "@core/models/base-entity.model";
-import { TaskPriorityEnum } from "@features/tasks/enums/task-status.enum";
 import { SubTaskModel } from "./sub-task.model";
 
 export class TaskModel extends BaseEntity {
@@ -7,7 +6,9 @@ export class TaskModel extends BaseEntity {
 
   notes?: string
 
-  priority!: TaskPriorityEnum
+  dateDue?: Date
+
+  priority!: 1 | 2 | 3
 
   subTasks!: SubTaskModel[]
 }

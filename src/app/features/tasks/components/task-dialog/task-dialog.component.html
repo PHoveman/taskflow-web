@@ -1,1 +1,41 @@
-<p>task-dialog works!</p>
+<div class="modal">
+  <div>
+    <label for="title">Title</label>
+    <input name="notes" type="text" data-testid="title" [(ngModel)]="title">
+  </div>
+  <div>
+    <label for="notes">Notes</label>
+    <textarea name="notes" data-testid="notes" cols="6" [(ngModel)]="notes"></textarea>
+  </div>
+  <div>
+    <label for="date">Date due</label>
+    <input name="date" type="date" data-testid="date" [(ngModel)]="dateDue">
+  </div>
+  <div>
+    <label for="priority">Priority</label>
+    <select name="priority" [(ngModel)]="priority">
+      <option [value]="3">Low</option>
+      <option [value]="2">Medium</option>
+      <option [value]="1">High</option>
+    </select>
+  </div>
+
+  <div>
+    <button (click)="addSubTaskHandler()">Add Task</button>
+    <ul>
+      @for (subTask of subTasks(); let i = $index; track i) {
+        <li>
+          <label [for]="'subTask' + i">Title</label>
+          <input [name]="'subTask' + i" type="text" [(ngModel)]="subTask.title">
+        </li>
+      } @empty {
+        <p>Add a task</p>
+      }
+    </ul>
+  </div>
+
+  <div>
+    <button (click)='addTaskHandler()'>Add Task</button>
+  </div>
+
+</div>

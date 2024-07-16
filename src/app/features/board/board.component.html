@@ -1,0 +1,49 @@
+<section>
+  <div class="board-container" cdkDropListGroup>
+    @for (column of columns(); track column) {      
+      <div class="container">
+        <div class="container-head">
+          <h2>{{ column.title }}</h2>
+        </div>
+
+        <div
+          cdkDropList
+          class="list"
+          #columnList="cdkDropList"
+          [cdkDropListData]="column.data"
+          [class.empty]="!column.data.length"
+          (cdkDropListDropped)="drop($event)">
+          @for (task of column.data; track task.id) {
+            <div
+              cdkDrag 
+              class="task"
+              (cdkDragStarted)="isDragging.set(true)"
+              [class.selected]="selectedTask()?.id === task.id">
+              <div class="task-top">
+                <p>{{ task.title }}</p>
+                <app-priority-pill [priority]="task.priority" />
+              </div>
+              <div class="task-bottom">
+                <mat-icon aria-hidden="false" aria-label="Default account icon" fontIcon="account_circle"></mat-icon>
+              </div>
+            </div>
+          }
+          @if (!isDragging()) {
+            <button class="add-task">
+              <p>Add task</p>
+              <mat-icon aria-hidden="false" aria-label="Add task icon" fontIcon="add"></mat-icon>
+            </button>
+          }
+        </div>
+      </div>
+    } @empty {
+      @if (isLoading()) {
+        <div class="board-loading">
+          <mat-spinner diameter="50" />
+        </div>
+      } @else {
+        <p>no columns. Create a column</p>
+      }
+    }
+  </div>
+</section>

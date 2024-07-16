@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, WritableSignal, signal } from '@angular/core';
+import { Component, OnInit, WritableSignal, computed, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -20,21 +20,31 @@ import { TasksService } from './services/tasks.service';
 export class TasksComponent implements OnInit {
   tasks: WritableSignal<TaskModel[]> = signal([])
   openedTaskId: WritableSignal<string | undefined> = signal(undefined)
+  searchQuery = model<string>('')
 
-  constructor(private tasksService: TasksService, private dialog: MatDialog) {}
+  filteredTasks = computed(() => this.tasks().filter(x => x.title.toLowerCase().includes(this.searchQuery().toLowerCase())))
+
+  constructor(
+    private tasksService: TasksService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.tasks = this.tasksService.getTasks()
   }
 
-  public openTaskDialogHandler(data?: TaskModel | undefined): void {
+  public openTaskDialogHandler(data?: TaskModel | undefined) {
     this.dialog.open(TaskDialogComponent, {
       width: '800px',
       data: data
     })
   }
 
-  public openTaskHandler(id: string | undefined): void {
+  public openTaskHandler(id: string | undefined) {
     this.openedTaskId.update(val => val === id ? undefined : id)
+  }
+
+  public removeTask(id: string) {
+    this.tasksService.delete(id)
   }
 }

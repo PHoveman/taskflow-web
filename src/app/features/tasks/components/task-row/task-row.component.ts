@@ -19,9 +19,14 @@ import { TaskTDStatusComponent } from '../task-td-status/task-td-status.componen
 export class TaskRowComponent implements OnInit {
   task = input.required<TaskModel>()
   isOpen = input.required<boolean>()
-  toggleOpenTask = output<string | undefined>()
+  onToggleOpenTask = output<string | undefined>()
+  onRemoveTask = output<string>()
 
   subTasks: WritableSignal<SubTaskModel[]> = signal([])
+
+  ngOnInit(): void {
+    this.subTasks.set(this.task().subTasks)
+  }
   
   tasksRemaining = computed(() => {
     return this.subTasks().reduce((acc, subTask) => {
@@ -31,7 +36,7 @@ export class TaskRowComponent implements OnInit {
   })
 
   public openTaskHandler(id: string | undefined): void {
-    this.toggleOpenTask.emit(id)
+    this.onToggleOpenTask.emit(id)
   }
 
   public actionSubTaskHandler(id: string): void {
@@ -40,7 +45,7 @@ export class TaskRowComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.subTasks.set(this.task().subTasks)
+  public removeTaskHandler(id: string) {
+    this.onRemoveTask.emit(id)
   }
 }

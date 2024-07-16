@@ -1,5 +1,6 @@
 <section>
   <div class="actions">
+    <input type="text" class="search-input" [(ngModel)]='searchQuery'>
     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add_circle" (click)="openTaskDialogHandler()"></mat-icon>
   </div>
   <table cellPadding="0" cellSpacing="0">
@@ -12,8 +13,13 @@
       <th>Status</th>
     </thead>
     <tbody>
-      @for (task of tasks(); track task.id) {
-        <app-task-row [task]="task" (toggleOpenTask)="openTaskHandler($event)" [isOpen]="openedTaskId() === task.id"></app-task-row>
+      @for (task of filteredTasks(); track task.id) {
+        <app-task-row
+          [task]="task"
+          [isOpen]="openedTaskId() === task.id"
+          (onToggleOpenTask)="openTaskHandler($event)"
+          (onRemoveTask)="removeTask($event)">
+        </app-task-row>
       }
     </tbody>
   </table>

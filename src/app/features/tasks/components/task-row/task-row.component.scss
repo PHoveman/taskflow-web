@@ -55,6 +55,14 @@ tr {
     padding: 0.25rem;
     color: grey;
 
+    .actionables {
+      cursor: pointer;
+
+      mat-icon:hover {
+        opacity: 0.8;
+      }
+    }
+
     h4 {
       margin: 0;
       padding: 0;
@@ -100,7 +108,7 @@ tr {
           justify-content: space-between;
           background: white;
           padding: 0.25rem 0.5rem;
-          border-radius: 8px;
+          border-radius: $br-md;
 
           mat-icon {
             color: $table-border-color;
@@ -127,7 +135,7 @@ tr {
         overflow: hidden;
         overflow-y: scroll;
         background: white;
-        border-radius: 8px;
+        border-radius: $br-md;
         padding: 0.25rem 0.5rem;
         margin: 0;
         white-space: pre-wrap;
