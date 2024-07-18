@@ -1,4 +1,4 @@
-import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, OnInit, ViewChild, ViewChildren, WritableSignal, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,13 +9,12 @@ import { AddTaskDialogComponent } from './components/add-task-dialog/add-task-di
 import { BoardService } from './services/board.service';
 import { BoardColumn, BoardDataObj } from './types/board-types.type';
 
+
 @Component({
   selector: 'app-board',
   standalone: true,
   imports: [
-    CdkDropList,
-    CdkDrag,
-    CdkDropListGroup,
+    DragDropModule,
     MatIconModule,
     PriorityPillComponent,
     MatProgressSpinnerModule
@@ -33,7 +32,10 @@ export class BoardComponent implements OnInit {
 
   @ViewChild('taskEl', { static: false }) taskEl!: ElementRef
 
-  constructor(private boardService: BoardService, private dialog: MatDialog) {}
+  constructor(
+    private boardService: BoardService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.isLoading.set(true)
