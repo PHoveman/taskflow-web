@@ -2,6 +2,7 @@
 @use '@angular/material' as mat;
 
 @import './app/shared/styles/variables';
+@import './app/shared/styles/modals';
 
 @include mat.core();
 

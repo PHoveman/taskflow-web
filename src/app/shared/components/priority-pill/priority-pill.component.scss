@@ -17,4 +17,8 @@ span {
   &.high {
     background: $negative;
   }
+
+  &.clickable {
+    cursor: pointer;
+  }
 }

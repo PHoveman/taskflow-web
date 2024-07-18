@@ -1,6 +1,6 @@
 <section>
   <div class="board-container" cdkDropListGroup>
-    @for (column of columns(); track column) {      
+    @for (column of columns(); track column.id) {      
       <div class="container">
         <div class="container-head">
           <h2>{{ column.title }}</h2>
@@ -29,7 +29,7 @@
             </div>
           }
           @if (!isDragging()) {
-            <button class="add-task">
+            <button class="add-task" type="button" (click)="addTask(column)">
               <p>Add task</p>
               <mat-icon aria-hidden="false" aria-label="Add task icon" fontIcon="add"></mat-icon>
             </button>

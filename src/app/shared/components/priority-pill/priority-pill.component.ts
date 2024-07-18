@@ -19,4 +19,6 @@ export class PriorityPillComponent {
       }
     }
   })
+
+  style = input<string>('')
 }

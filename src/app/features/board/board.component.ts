@@ -9,7 +9,6 @@ import { AddTaskDialogComponent } from './components/add-task-dialog/add-task-di
 import { BoardService } from './services/board.service';
 import { BoardColumn, BoardDataObj } from './types/board-types.type';
 
-
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -66,12 +65,10 @@ export class BoardComponent implements OnInit {
     this.isDragging.set(false)
   }
 
-  public addTask(columnId: string) {
+  public addTask(column: BoardColumn) {
     this.dialog.open(AddTaskDialogComponent, {
       width: '400px',
-      data: {
-        columnId
-      }
+      data: { column }
     })
   }
 }

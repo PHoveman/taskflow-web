@@ -1,1 +1,22 @@
-<p>add-task-dialog works!</p>
+<form class="modal" (ngSubmit)="addTask()">
+  <div class="header">
+    <h2>Add task for '{{ data.column.title }}' column</h2>
+  </div>
+  <div class="body">
+    <div class="body-row">
+      <label for="title">Title</label>
+      <input type="text" id="title">
+    </div>
+    <div class="body-row">
+      <ul>
+        <app-priority-pill [priority]="1" [style]="'clickable'"/>
+        <app-priority-pill [priority]="2" [style]="'clickable'"/>
+        <app-priority-pill [priority]="3" [style]="'clickable'"/>
+      </ul>
+      
+    </div>
+    <div class="actions">
+      <button type="submit">Add task</button>
+    </div>
+  </div>
+</form>
